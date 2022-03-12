@@ -1,0 +1,24 @@
+<article  style="border-bottom:1px solid #fff">
+	<h2 class="display-6">{{titulo}}</h2>
+	<blockquote class="blockquote">
+		<p>{{conteudo}}</p>
+	</blockquote>
+	<h3 style="border-bottom:1px solid #fff;">Comentários</h3>
+	{% if comentarios == false %}
+		<blockquote class="blockquote">
+			<small><i>Essa postagem não possui mensagens</i></small>
+		</blockquote>
+	{% else %}
+		{%for coment in comentarios %}
+		<article style="background-color: #fff;border-radius:10px;padding:10px 10px;">
+			<h4>{{coment.nome}}</h4>
+			<blockquote class="blockquote">
+				<small><i>{{coment.comentario}}</i></small>
+			</blockquote>
+			<hr>
+		{% endfor %}
+	{% endif %}
+	</article>
+	<br>
+	<a href="?pagina=home" class="btn btn-primary">Back</a>
+</article>

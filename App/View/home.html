@@ -1,8 +1,10 @@
+{% for post in postagem %}
 <article style="border-bottom: 1px solid #fff;">
-	<a href="#">
-		<h2 class="display-6">{{titulo}}</h2>
+	<a href="?pagina=post&id={{post.id}}">
+		<h2 class="display-6">{{post.titulo}}</h2>
 	</a>
 	<blockquote class="blockquote">
-		<p>Tasdasdsadeste</p>
+		<p>{{post.conteudo}}</p>
 	</blockquote>
 </article>
+{% endfor %}
