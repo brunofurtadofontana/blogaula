@@ -45,4 +45,33 @@ class Postagem{
 		return $res;
 	}
 
+	public static function insert($dadosPost){
+
+		$con = Connection::getConn();
+		$sql = "Insert into postagem(titulo,conteudo)VALUES(:tit, :cont)";
+		$sql = $con->prepare($sql);
+		$sql->bindValue(':tit', $dadosPost['titulo']);
+		$sql->bindValue(':cont', $dadosPost['conteudo']);
+		$res = $sql->execute();
+		if(!$res){
+			throw new Exception("Falha ao inserir a publicação");
+			return false;
+		}
+		return true;
+	}
+	public static function delete($idPost){
+
+		$con = Connection::getConn();
+		$sql = "DELETE FROM postagem WHERE id = :id";
+		$sql = $con->prepare($sql);
+		$sql->bindValue(':id', $idPost, PDO::PARAM_INT);
+		$res = $sql->execute();
+		if(!$res){
+			throw new Exception("Falha ao deletar a publicação");
+			return false;
+		}
+		return true;
+
+	}
+
 }

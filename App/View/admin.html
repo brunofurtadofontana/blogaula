@@ -1,0 +1,107 @@
+<a href="#" style="float:right" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Postar</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Titulo</th>
+      <th scope="col">Conteúdo</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for postagem in postagens %}
+  	<tr>
+	  	<td>{{postagem.titulo}}</td>
+	  	<td>{{postagem.conteudo}}</td>
+	  	<td>
+	  		<a href="#" data-bs-toggle="modal" data-bs-target="#modalUpdate">
+	  			<i class="bi bi-pencil-square"></i> 
+	  		</a>
+	  		<a href="#" data-bs-toggle="modal" data-bs-target="#modalDelete">
+	  			<i class="bi bi-trash3-fill"></i> 
+	  		</a>
+	  	</td>
+  	</tr>
+  	<!-- Modal DELETE -->
+	<div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Deletar Postagem</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	       	<p>Tem certerza que deseja deletar a postagem?</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <a href="?pagina=admin&metodo=delete&id={{postagem.id}}" type="submit" class="btn btn-primary">Deletar</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- FINAL MODAL DELETE -->
+  	{% endfor %}
+  </tbody>
+</table>
+
+<!-- Modal INSERT -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Postagem</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       	<form action="?pagina=admin&metodo=insert" method="post">
+       		<div class="form-group">
+       			<label>Titulo</label>
+       			<input type="text" class="form-control" name="titulo" required>
+       		</div>
+       		<div class="form-group">
+       			<label>Conteudo</label>
+       			<textarea class="form-control" name="conteudo" placeholder="Mensagem"></textarea>
+       		</div>
+       	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- FINAL MODAL INSERT -->
+
+
+
+<!-- Modal UPDATE -->
+<div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Atualizar postagem</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       	<form action="?pagina=admin&metodo=insert" method="post">
+       		<div class="form-group">
+       			<label>Titulo</label>
+       			<input type="text" class="form-control" name="titulo" required>
+       		</div>
+       		<div class="form-group">
+       			<label>Conteudo</label>
+       			<textarea class="form-control" name="conteudo" placeholder="Mensagem"></textarea>
+       		</div>
+       	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FINAL MODAL UPDATE -->
