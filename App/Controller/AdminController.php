@@ -42,4 +42,15 @@ class AdminController{
 			echo $e->getMessage();
 		}
 	}
+
+	public function update(){
+		try {
+
+			Postagem::update($_POST);
+			header("Location:?pagina=admin");
+
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	}
 }
