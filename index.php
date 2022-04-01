@@ -1,5 +1,6 @@
 <?php
 
+
 require_once('App/Core/Core.php');
 require_once('lib/Connection.php');
 require_once('App/Controller/HomeController.php');
