@@ -4,6 +4,19 @@
 
 class Core{
 
+	private $usuario;
+
+	public function __construct(){
+
+		if (isset($_SESSION['USUARIO'])) {
+
+			$this->usuario = $_SESSION['USUARIO'];
+
+		}else{
+
+			$this->usuario = null;
+		}
+	}
 	public function Start($urlGet){
 
 		if(isset($urlGet['metodo'])){
@@ -17,6 +30,26 @@ class Core{
 		}else{
 			$controller = 'HomeController';
 		}
+
+		if($this->usuario){
+			$pg_permission = ['AdminController'];
+
+			if(!isset($controller) || in_array($controller,$pg_permission)){
+
+				$controller = 'AdminController';
+				$metodo = 'index';
+			}
+		}else{
+
+			$pg_permission = ['LoginController','HomeController','AdminController'];
+
+			if(!isset($controller) || in_array($controller,$pg_permission)){
+				
+				$controller = 'LoginController';
+				$metodo = 'index';
+			}
+		}
+
 		if (!class_exists($controller)) {
 			$controller = 'ErroController';
 		}

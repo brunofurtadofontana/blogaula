@@ -50,7 +50,14 @@ class AdminController{
 			header("Location:?pagina=admin");
 
 		} catch (Exception $e) {
+			
 			echo $e->getMessage();
 		}
+	}
+	public function logout(){
+
+		unset($_SESSION['USUARIO']);
+		session_destroy();
+		header("Location:?pagina=login");
 	}
 }
