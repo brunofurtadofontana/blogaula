@@ -6,40 +6,53 @@ class Core{
 
 	private $usuario;
 
-	public function __construct(){
+	public function __construct(){ // método mágico que sempre vai carregar junto com a class Core
 
-		if (isset($_SESSION['USUARIO'])) {
+		if (isset($_SESSION['USUARIO'])) {//Verifica se existe a SESSÃO
 
-			$this->usuario = $_SESSION['USUARIO'];
+			$this->usuario = $_SESSION['USUARIO']; //Caso exista armazena na variavel private $usuario
 
-		}else{
+		}else{//Caso não exista a variavel private $usuario recebe null
 
 			$this->usuario = null;
 		}
 	}
+
+	/*
+		Método responsável Checar o que tem na URL e criar as rotas para acesso as páginas
+	*/
+
 	public function Start($urlGet){
 
-		if(isset($urlGet['metodo'])){
-			$acao = $urlGet['metodo'];
-		}else{
+		if(isset($urlGet['metodo'])){//Verifica que foi setado algum método via URL
+
+			$acao = $urlGet['metodo'];//armazena qual o metodo passado na url via GET
+
+		}else{//Caso não exista a URL GET metodo, força para o metodo index
+
 			$acao = 'index';
 		}
 
-		if (isset($urlGet['pagina'])) {
-			$controller = ucfirst($urlGet['pagina'].'Controller');
-		}else{
+		if (isset($urlGet['pagina'])) {//Verifica que foi setado alguma página via URL
+
+			$controller = ucfirst($urlGet['pagina'].'Controller');//Pega o nome da página e concatena com a palavra Controller ex. ?pagina=login vira 'LoginController'
+ 
+		}else{//Caso não exista a página, será forçado para ir ao homeController
+
 			$controller = 'HomeController';
 		}
 
-		if($this->usuario){
-			$pg_permission = ['AdminController'];
+		if($this->usuario){//Verifica se existe um usuario logado na SESSION
 
-			if(!isset($controller) || in_array($controller,$pg_permission)){
+			$pg_permission = ['AdminController'];//Página que será liberada apos login
+
+			if(!isset($controller) || in_array($controller,$pg_permission)){//Caso não exista um controllador, força para o AdminController
 
 				$controller = 'AdminController';
 				$metodo = 'index';
 			}
-		}else{
+
+		}else{//Caso não tenha usuario logado na SESSION é feito o bloqueio das páginas
 
 			$pg_permission = ['LoginController','HomeController','AdminController'];
 

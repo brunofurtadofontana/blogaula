@@ -1,6 +1,17 @@
 <?php
 
+
+/*
+	Classe responsável pelo C.R.U.D de postagem
+*/
+
+
 class Postagem{
+
+
+	/*
+		Método responsável por selecionar todas as postagens
+	*/
 
 	public static function seleciona(){
 		
@@ -22,6 +33,9 @@ class Postagem{
 		return $res;
 	}	
 	
+	/*
+		Método responsável por selecionar todas as postagens de acordo com o ID passado por parâmetro
+	*/
 	public static function consultaId($idPost){
 
 		$con = Connection::getConn();
@@ -45,6 +59,12 @@ class Postagem{
 		return $res;
 	}
 
+
+	/*
+		Método responsável por inserir uma postagem ao banco de dados
+	*/
+
+
 	public static function insert($dadosPost){
 
 		$con = Connection::getConn();
@@ -59,6 +79,11 @@ class Postagem{
 		}
 		return true;
 	}
+
+	/*
+		Método responsável por deletar uma postagem de acordo com o ID passado por parâmetro
+	*/
+
 	public static function delete($idPost){
 
 		$con = Connection::getConn();
@@ -73,6 +98,13 @@ class Postagem{
 		return true;
 
 	}
+
+
+	/*
+		Método responsável por atualizar uma postagem de acordo com o ID passado por parâmetro
+	*/
+
+
 	public static function update($params){
 		
 		$con = Connection::getConn();
